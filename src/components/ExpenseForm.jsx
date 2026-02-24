@@ -139,13 +139,13 @@ export default function ExpenseForm({ onSuccess }) {
     <button
       type="submit"
       disabled={loading}
-      className="w-full py-3 rounded-xl font-semibold
-                 bg-gradient-to-r from-emerald-400 to-cyan-500
-                 hover:from-emerald-500 hover:to-cyan-600
-                 text-black
-                 shadow-lg shadow-emerald-500/20
-                 transition-all duration-300
-                 disabled:opacity-50"
+  className="w-full py-3 rounded-xl font-semibold
+           bg-gradient-to-r from-green-400 to-green-600
+           hover:from-green-500 hover:to-green-700
+           text-white
+           shadow-lg shadow-green-500/30
+           transition-all duration-300
+           disabled:opacity-50"
     >
       {loading ? "Adding..." : "Add Transaction"}
     </button>
