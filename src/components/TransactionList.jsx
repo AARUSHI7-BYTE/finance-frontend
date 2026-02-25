@@ -35,10 +35,10 @@ export default function TransactionList({ transactions, onDelete }) {
             <h3 className="font-semibold text-white text-lg">
               {t.description || "No description"}
             </h3>
-
+{/* 
             <p className="text-sm text-gray-400 mt-1">
               {t.category_name || "Uncategorized"}
-            </p>
+            </p> */}
 
             {t.tags && t.tags.length > 0 && (
               <div className="flex gap-2 mt-3 flex-wrap">

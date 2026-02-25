@@ -1,15 +1,18 @@
 import { useMemo } from "react";
 
 export default function BudgetCard({ budget }) {
-  const { category_name, limit_amount, spent_amount } = budget;
+  // Match your actual DB column names
+  const categoryName = budget.categories?.name || "Unknown Category";
+  const limitAmount = Number(budget.monthly_limit || 0);
+  const spentAmount = Number(budget.spent_amount || 0); // may not exist yet
 
   const percentage = useMemo(() => {
-    if (!limit_amount) return 0;
-    return Math.min((spent_amount / limit_amount) * 100, 100);
-  }, [spent_amount, limit_amount]);
+    if (!limitAmount) return 0;
+    return Math.min((spentAmount / limitAmount) * 100, 100);
+  }, [spentAmount, limitAmount]);
 
-  const remaining = limit_amount - spent_amount;
-  const exceeded = spent_amount > limit_amount;
+  const remaining = limitAmount - spentAmount;
+  const exceeded = spentAmount > limitAmount;
 
   return (
     <div className="bg-gradient-to-br from-[#0f172a] to-[#111827] 
@@ -19,10 +22,9 @@ export default function BudgetCard({ budget }) {
                     hover:shadow-lg hover:shadow-cyan-500/20 
                     transition-all duration-300">
 
-      {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-lg font-semibold text-white">
-          {category_name}
+          {categoryName}
         </h3>
 
         <span
@@ -36,13 +38,12 @@ export default function BudgetCard({ budget }) {
         </span>
       </div>
 
-      {/* Numbers */}
       <div className="text-sm mb-4 space-y-1 text-gray-300">
         <p>
-          Spent: <strong className="text-white">₹{spent_amount}</strong>
+          Spent: <strong className="text-white">₹{spentAmount}</strong>
         </p>
         <p>
-          Limit: <strong className="text-white">₹{limit_amount}</strong>
+          Limit: <strong className="text-white">₹{limitAmount}</strong>
         </p>
         <p>
           Remaining:{" "}
@@ -58,7 +59,6 @@ export default function BudgetCard({ budget }) {
         </p>
       </div>
 
-      {/* Progress Bar Background */}
       <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
         <div
           className={`h-3 rounded-full transition-all duration-700 ${
