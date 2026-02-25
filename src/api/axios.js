@@ -1,13 +1,21 @@
 import axios from "axios";
 
-const instance = axios.create({
+const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
-instance.interceptors.request.use((config) => {
+// Attach token automatically
+api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
-  if (token) config.headers.Authorization = `Bearer ${token}`;
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
   return config;
 });
 
-export default instance;
+// API functions
+export const getCategories = () => api.get("/categories");
+
+export default api;

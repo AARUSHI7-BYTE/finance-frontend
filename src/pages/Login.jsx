@@ -15,9 +15,9 @@ export default function Login() {
     setError("");
 
     try {
-      const { data } = await axios.post("/auth/login", { email, password });
+      const { data } = await axios.post("http://localhost:3500/api/auth/login", { email, password });
       login(data.token);
-      navigate("/dashboard");
+      navigate("/dashboard");;
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     }
@@ -26,7 +26,7 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-900 to-black">
       <div className="w-full max-w-sm bg-gray-900 p-8 rounded-2xl shadow-2xl border border-green-700">
-        
+
         <h2 className="text-2xl font-semibold text-white text-center mb-6">
           Login
         </h2>

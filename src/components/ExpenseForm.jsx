@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "../api/axios";
 
 export default function ExpenseForm({ onSuccess }) {
@@ -9,6 +9,19 @@ export default function ExpenseForm({ onSuccess }) {
     description: "",
     tags: "",
   });
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+  const fetchCategories = async () => {
+    try {
+      const res = await axios.get("/categories");
+      setCategories(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  fetchCategories();
+}, []);
 
   const [loading, setLoading] = useState(false);
 
@@ -31,7 +44,7 @@ export default function ExpenseForm({ onSuccess }) {
         tags: form.tags.split(",").map((tag) => tag.trim()),
       });
 
-      // Reset form
+      
       setForm({
         amount: "",
         category_id: "",
@@ -62,7 +75,7 @@ export default function ExpenseForm({ onSuccess }) {
       Add Transaction
     </h2>
 
-    {/* Amount */}
+    
     <input
       type="number"
       name="amount"
@@ -77,22 +90,27 @@ export default function ExpenseForm({ onSuccess }) {
                  outline-none transition-all duration-300"
     />
 
-    {/* Category */}
-    <input
-      type="text"
-      name="category_id"
-      placeholder="Category ID"
-      value={form.category_id}
-      onChange={handleChange}
-      required
-      className="bg-white/5 border border-white/10
-                 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/40
-                 text-white placeholder-gray-400
-                 p-3 w-full mb-4 rounded-xl
-                 outline-none transition-all duration-300"
-    />
+   
+ <select
+  name="category_id"
+  value={form.category_id}
+  onChange={handleChange}
+  required
+  className="bg-white/5 border border-white/10
+             focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/40
+             text-white p-3 w-full mb-4 rounded-xl
+             outline-none transition-all duration-300"
+>
+  <option value="">Select Category</option>
 
-    {/* Type */}
+  {categories.map((cat) => (
+    <option key={cat.id} value={cat.id} className="bg-[#0f172a]">
+      {cat.name}
+    </option>
+  ))}
+</select>
+
+    
     <select
       name="type"
       value={form.type}
@@ -107,7 +125,7 @@ export default function ExpenseForm({ onSuccess }) {
       <option value="income" className="bg-[#0f172a]">Income</option>
     </select>
 
-    {/* Description */}
+    
     <input
       type="text"
       name="description"
@@ -121,7 +139,6 @@ export default function ExpenseForm({ onSuccess }) {
                  outline-none transition-all duration-300"
     />
 
-    {/* Tags */}
     <input
       type="text"
       name="tags"
@@ -135,7 +152,7 @@ export default function ExpenseForm({ onSuccess }) {
                  outline-none transition-all duration-300"
     />
 
-    {/* Button */}
+    
     <button
       type="submit"
       disabled={loading}
