@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-export default function BudgetCard({ budget }) {
+export default function BudgetCard({ budget, onDelete }) {
   // Match your actual DB column names
   const categoryName = budget.categories?.name || "Unknown Category";
   const limitAmount = Number(budget.monthly_limit || 0);
@@ -73,6 +73,19 @@ export default function BudgetCard({ budget }) {
       <div className="text-right text-xs mt-2 text-gray-400">
         {percentage.toFixed(0)}% used
       </div>
+      <div className="flex justify-end mt-5">
+  <button
+    onClick={() => onDelete(budget.id)}
+    className="px-4 py-2 text-sm rounded-lg
+               bg-red-500/10 text-red-400
+               border border-red-500/20
+               hover:bg-red-500/20
+               transition-all duration-300"
+  >
+    Delete
+  </button>
+</div>
+
     </div>
   );
 }

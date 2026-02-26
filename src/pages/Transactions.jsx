@@ -30,6 +30,10 @@ export default function Transactions() {
     fetchCategories();
   }, []);
 
+  useEffect(() => {
+    console.log("Categories state:", categories);
+  }, [categories]);
+
   return (
     <div className="p-6">
       <ExpenseForm
