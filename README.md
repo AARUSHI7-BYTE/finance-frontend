@@ -94,6 +94,8 @@ Dashboard
 
 ⸻
 
+DEPLOYED LINK : https://finance-frontend-teal.vercel.app
+
 📈 Future Improvements
 	•	Edit functionality for all modules
 	•	Recurring payments automation
