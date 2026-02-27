@@ -11,17 +11,29 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    setError("");
+  e.preventDefault();
+  setError("");
 
-    try {
-      const { data } = await axios.post("http://localhost:3500/api/auth/login", { email, password });
-      login(data.token);
-      navigate("/dashboard");;
-    } catch (err) {
-      setError(err.response?.data?.message || "Login failed");
-    }
-  };
+  try {
+ 
+    const { data } = await axios.post("/auth/login", {
+      email,
+      password,
+    });
+
+
+    login(data.token);
+
+    
+    await axios.post("/categories/default");
+
+
+    navigate("/dashboard");
+
+  } catch (err) {
+    setError(err.response?.data?.message || "Login failed");
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-900 to-black">
