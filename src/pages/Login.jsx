@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import axios from "../api/axios";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -43,6 +44,12 @@ return (
         Login
       </h2>
 
+      {error && (
+        <p className="text-red-500 text-sm mb-4 text-center">
+          {error}
+        </p>
+      )}
+
       <form onSubmit={handleLogin}>
         <input
           type="email"
@@ -64,9 +71,20 @@ return (
           type="submit"
           className="w-full bg-green-600 hover:bg-green-700 text-white py-2 sm:py-2.5 rounded-lg transition duration-300 font-medium text-sm sm:text-base"
         >
-          Register
+          Login
         </button>
       </form>
+
+      {/* Sign Up Redirect */}
+      <p className="mt-6 text-sm text-center text-gray-400">
+        Don’t have an account?{" "}
+        <Link
+          to="/"
+          className="text-green-400 hover:text-green-300 font-medium transition"
+        >
+          Sign up
+        </Link>
+      </p>
 
     </div>
   </div>
