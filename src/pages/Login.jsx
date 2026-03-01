@@ -35,46 +35,40 @@ export default function Login() {
   }
 };
 
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-900 to-black">
-      <div className="w-full max-w-sm bg-gray-900 p-8 rounded-2xl shadow-2xl border border-green-700">
+return (
+  <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-r from-green-900 to-black">
+    <div className="w-full max-w-sm sm:max-w-md bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-2xl border border-green-700">
+      
+      <h2 className="text-xl sm:text-2xl font-semibold text-white text-center mb-6">
+        Login
+      </h2>
 
-        <h2 className="text-2xl font-semibold text-white text-center mb-6">
-          Login
-        </h2>
+      <form onSubmit={handleLogin}>
+        <input
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+          required
+          className="w-full mb-4 px-4 py-2 text-sm sm:text-base bg-gray-800 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+        />
 
-        {error && (
-          <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
-        )}
+        <input
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          required
+          className="w-full mb-4 px-4 py-2 text-sm sm:text-base bg-gray-800 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+        />
 
-        <form onSubmit={handleLogin}>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="w-full mb-4 px-4 py-2 bg-gray-800 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
+        <button
+          type="submit"
+          className="w-full bg-green-600 hover:bg-green-700 text-white py-2 sm:py-2.5 rounded-lg transition duration-300 font-medium text-sm sm:text-base"
+        >
+          Register
+        </button>
+      </form>
 
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="w-full mb-6 px-4 py-2 bg-gray-800 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
-
-          <button
-            type="submit"
-            className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg transition duration-300 font-medium"
-          >
-            Login
-          </button>
-        </form>
-
-      </div>
     </div>
-  );
+  </div>
+);
 }   

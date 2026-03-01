@@ -50,16 +50,29 @@ export default function Budgets() {
   });
 
 return (
-  <div className="p-6">
-    <BudgetForm onSuccess={fetchBudgets} />
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    
+    {/* Page Title */}
+    <h1 className="text-2xl sm:text-3xl font-bold mb-6">
+      Budgets
+    </h1>
 
-    {enrichedBudgets.map((budget) => (
-      <BudgetCard
-        key={budget.id}
-        budget={budget}
-        onDelete={handleDelete}
-      />
-    ))}
+    {/* Budget Form */}
+    <div className="mb-8">
+      <BudgetForm onSuccess={fetchBudgets} />
+    </div>
+
+    {/* Budget Cards Grid */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {enrichedBudgets.map((budget) => (
+        <BudgetCard
+          key={budget.id}
+          budget={budget}
+          onDelete={handleDelete}
+        />
+      ))}
+    </div>
+
   </div>
 );
 }

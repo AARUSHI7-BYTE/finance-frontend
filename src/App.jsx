@@ -14,7 +14,7 @@ function App() {
     console.log("API URL:", import.meta.env.VITE_API_URL);
   }, [])
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0b1120] via-[#0f172a] to-black text-white p-8">
+    <div className="min-h-screen bg-gradient-to-br from-[#0b1120] via-[#0f172a] to-black text-white px-4 sm:px-6 lg:px-8 py-6">
       <Navbar />
       <Routes>
         <Route path="/" element={<Register />} />
